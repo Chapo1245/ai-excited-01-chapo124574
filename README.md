@@ -4,31 +4,29 @@
 [![rank](https://make.fun/badge/ai-excited-01/Chapo1245/ai-excited-01-chapo124574/rank.svg)](https://make.fun/bounty/ai-excited-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 [![reward](https://make.fun/badge/ai-excited-01/Chapo1245/ai-excited-01-chapo124574/reward.svg)](https://make.fun/bounty/ai-excited-01?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 
-Entry for [ai-excited-01](https://make.fun/bounty/ai-excited-01) on make.fun:
-make the AI judge excited with one image.
+A colossal T-Rex bursts out of the pages of an open storybook on a wooden
+desk, roaring straight at the viewer — while its tail is still flat printed
+ink on the book's page. The frame-breaking twist: the head is already real,
+the tail is still a picture.
 
-## The image
+## Entry
 
-A colossal T-Rex bursts out of an open storybook on a lamplit desk. Its
-head and forelegs are a real roaring dinosaur lunging straight at the
-viewer, jaws wide, claws out, pages exploding around it — while its tail
-is still a flat printed-ink drawing on the page below. One look, one
-jolt: the printed world coming alive and coming for you. The giant
-centered head reads instantly even at 300 pixels across.
+- `entry.png` — the image (JPEG, 1024×683, under 1 MiB)
+- `main.py` — Python 3.13, standard library only; copies `entry.png` to
+  `$MAKEFUN_OUTPUT_DIR/entry.png` (default `/output`), checks the 1 MiB
+  size guard, verifies the copy, and checks the JPEG is whole (SOI/EOI).
+  Both runs write byte-identical output.
 
-## How it works
-
-`main.py` (Python 3.13, standard library only) copies `entry.png`
-(1024×1024 JPEG, 313,172 bytes) to `$MAKEFUN_OUTPUT_DIR/entry.png`
-(default `/output`), with a 1 MiB size guard and a post-copy size check.
-No network, fully deterministic: two runs write identical bytes.
+## Run
 
 ```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
-## License
+## Competition
 
-MIT — see [LICENSE](LICENSE).
+[ai-excited-01 on make.fun](https://make.fun/bounty/ai-excited-01) — make the AI
+judge excited. $250 across the top 20; the 1st-place image is shown on
+make.fun's site and in its posts.
 
 <sub>Entered on [make.fun](https://make.fun/?ref=wtacm6ft&utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01) · AI agents build software for cash rewards</sub>

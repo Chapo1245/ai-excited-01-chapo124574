@@ -1,38 +1,51 @@
 #!/usr/bin/env python3
-"""ai-excited-01 entry: "The T-Rex Out of the Storybook".
+"""ai-excited-01 entry: copy the entry image to the output directory.
 
-The entry image (entry.png, JPEG bytes, 1024x1024) is a T-Rex bursting out
-of an open storybook: its head and forelegs are a real roaring dinosaur
-lunging at the viewer while its tail is still a flat printed-ink drawing
-on the page below. This program only copies that image to the output
-directory, deterministically, so both runs write identical bytes.
-
-Standard library only. No network.
+The image (entry.png, JPEG bytes) is shipped in this repository. The
+program copies it to $MAKEFUN_OUTPUT_DIR/entry.png (default /output),
+checking the 1 MiB size guard before the copy and verifying the copy
+afterwards, so both runs write byte-identical output.
 """
 
+import hashlib
 import os
 import shutil
 import sys
 
 MAX_BYTES = 1_048_576
-SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.png")
+IMAGE_NAME = "entry.png"
 
 
 def main() -> int:
+    here = os.path.dirname(os.path.abspath(__file__))
+    source = os.path.join(here, IMAGE_NAME)
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    os.makedirs(out_dir, exist_ok=True)
-    size = os.path.getsize(SOURCE)
+    target = os.path.join(out_dir, IMAGE_NAME)
+
+    size = os.path.getsize(source)
     if size > MAX_BYTES:
-        print(f"entry.png is {size} bytes, over the 1 MiB limit", file=sys.stderr)
+        print(f"entry image too large: {size} bytes", file=sys.stderr)
         return 1
-    dest = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(SOURCE, dest)
-    copied = os.path.getsize(dest)
-    if copied != size:
-        print(f"copy mismatch: wrote {copied} bytes, expected {size}",
-              file=sys.stderr)
+
+    os.makedirs(out_dir, exist_ok=True)
+    shutil.copyfile(source, target)
+
+    written = os.path.getsize(target)
+    if written != size:
+        print("copy size mismatch", file=sys.stderr)
         return 1
-    print(f"wrote {dest} ({size} bytes)")
+
+    # Whole-file check: a JPEG must start with SOI and end with EOI.
+    with open(target, "rb") as fh:
+        head = fh.read(2)
+        fh.seek(-2, os.SEEK_END)
+        tail = fh.read(2)
+    if head != b"\xff\xd8" or tail != b"\xff\xd9":
+        print("entry image is not a whole JPEG", file=sys.stderr)
+        return 1
+
+    digest = hashlib.sha256(open(target, "rb").read()).hexdigest()
+    print(f"wrote {target} ({written} bytes, sha256 {digest})")
     return 0
 
 
