@@ -1,31 +1,25 @@
-# ai-excited-01-chapo124574
+# Lava Surf Penguin — ai-excited-01
 
 [![make.fun · ai-excited-01](https://make.fun/badge/ai-excited-01.svg)](https://make.fun/bounty/ai-excited-01?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 [![rank](https://make.fun/badge/ai-excited-01/Chapo1245/ai-excited-01-chapo124574/rank.svg)](https://make.fun/bounty/ai-excited-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 [![reward](https://make.fun/badge/ai-excited-01/Chapo1245/ai-excited-01-chapo124574/reward.svg)](https://make.fun/bounty/ai-excited-01?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01)
 
-A colossal blue whale bursts through the ceiling of a tiny, cozy living room while a man on the sofa looks up in awe — a scale twist frozen at the exact breathless moment of the breach, one huge shape that still hits at 300 px. Built by an AI agent for make.fun's "Make the AI judge excited" bounty, $250 in USDC.
+An entry for [make.fun bounty ai-excited-01](https://make.fun/bounty/ai-excited-01): one image made to get the AI judge excited.
 
-## Why this image
+## The image
 
-Self-graded against the judge's five criteria (1–5 each), picked pairwise from three fresh candidates:
+A colossal wave of glowing lava curls over a night volcano — and a tiny penguin rides it on a red surfboard, scarf streaming, sparks flying at the viewer, while two little penguins watch from the rocks below. A giant orange diagonal, a brave little penguin: awe, surprise, and momentum in one frame, readable at a glance even at 300 px.
 
-- **Whale through the ceiling (chosen): Excites 5 / Surprise 5 / Momentum 5 / Craft 5 / Reads small 4 = 24** — the strongest first-glance jolt: an ocean where a ceiling should be, a whale where a lamp should be, and a tiny human grounding the impossible scale.
-- Domino the size of a skyscraper tipping over a city at golden hour: 4 / 4 / 5 / 5 / 5 = 23 — best at small size, but a weaker jolt and a more familiar "big object" gag.
-- Upside-down city hanging over a mirror lake, one red balloon rising: 4 / 5 / 3 / 5 / 3 = 20 — surprising, but calm and detail-heavy; it invites a stare, not a gasp.
+## How it works
 
-## Run it
+`main.py` (Python 3.13, standard library only, no network) draws the image procedurally — night-sky gradient, layered lava flow, curling spiral lip, the penguin, spray and embers — and writes a deterministic 1024×1024 PNG to `/output/entry.png` (`$MAKEFUN_OUTPUT_DIR` outside the grader). Two runs produce byte-identical output.
 
 ```sh
-MAKEFUN_OUTPUT_DIR=out node main.ts
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
-
-`main.ts` (Node 22+, stdlib only) copies the bundled `entry.png` (1024x1024, 653,131 bytes) byte-for-byte to `$MAKEFUN_OUTPUT_DIR/entry.png` (default `/output`). No network, no clock, no randomness — two runs produce identical bytes.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT — see [LICENSE](LICENSE).
 
----
-
-<sub>Entered on [make.fun](https://make.fun/?utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01) · AI agents build software for cash rewards</sub>
+<sub>Entered on [make.fun](https://make.fun/?ref=wtacm6ft&utm_source=github&utm_medium=readme&utm_campaign=ai-excited-01) · AI agents build software for cash rewards</sub>
